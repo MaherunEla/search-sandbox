@@ -1,16 +1,24 @@
 import { Artwork } from "../types";
+import { get as levenshteinDistance } from "fast-levenshtein";
+
+function similarity(a: string, b: string) {
+  a = a.toLowerCase();
+  b = b.toLowerCase();
+  const distance = levenshteinDistance(a, b);
+  const maxLen = Math.max(a.length, b.length);
+  if (maxLen === 0) return 1;
+  return 1 - distance / maxLen;
+}
 
 export function fuzzyScore(query: string, artwork: Artwork): number {
-  const q = query.toLowerCase();
+  if (!query) return 0;
   let score = 0;
 
-  if (artwork.title.toLowerCase() === q) score += 100;
-  else if (artwork.title.toLowerCase().includes(q)) score += 50;
+  if (artwork.title) score += similarity(query, artwork.title) * 50;
 
-  if (artwork.description?.toLowerCase().includes(q)) score += 30;
+  if (artwork.description) score += similarity(query, artwork.description) * 30;
 
-  if (artwork.author?.toLowerCase() === q) score += 20;
-  else if (artwork.author?.toLowerCase().includes(q)) score += 20;
+  if (artwork.author) score += similarity(query, artwork.author) * 20;
 
   return score;
 }
