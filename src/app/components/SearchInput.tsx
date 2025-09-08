@@ -3,6 +3,7 @@
 import { useState, useEffect } from "react";
 import { items } from "@/app/components/items";
 import type { ApiResponse, Artwork } from "@/app/types";
+import { highlightText } from "../utils/highlight";
 
 function useDebounce(value: string, delay = 300) {
   const [debouncedValue, setDebouncedValue] = useState(value);
@@ -98,8 +99,20 @@ export default function SearchInput() {
 
       <ul className="mt-2 border-t border-gray-200">
         {results.map((item) => (
-          <li key={item.id} className="border-b py-1">
-            {item.title} {item.description} {item.author}
+          <li key={item.id} className="my-2">
+            <div
+              dangerouslySetInnerHTML={{
+                __html: highlightText(item.title, query),
+              }}
+            />
+            {item.description && (
+              <p
+                className="text-sm text-gray-600"
+                dangerouslySetInnerHTML={{
+                  __html: highlightText(item.description, query),
+                }}
+              />
+            )}
           </li>
         ))}
       </ul>
