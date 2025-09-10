@@ -1,36 +1,46 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# 🔍 Search Sandbox
 
-## Getting Started
+A mini-project to experiment with **advanced search techniques** in web apps using PostgreSQL and frontend optimizations. The project showcases a learning journey from **custom fuzzy search** to **PostgreSQL `pg_trgm`**.
 
-First, run the development server:
+---
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+## 🛠️ Tech Stack
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+- **Frontend:** React / Next.js
+- **Backend:** PostgreSQL (`pg_trgm`)
+- **Other:** Debounce for input optimization, highlight matching text, paginated search results
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+---
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+## 🚀 Feature & Learning Progression
 
-## Learn More
+### 1️⃣ `feat(search): add fuzzy scoring across title, description, and author`
 
-To learn more about Next.js, take a look at the following resources:
+- Implemented a **custom fuzzy scoring algorithm** to search across multiple fields.
+- Learned how to assign weights to title, description, and author for better relevance.
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+### 2️⃣ `feat(search): implement fuzzy search with Levenshtein distance`
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+- Added **Levenshtein distance algorithm** to handle minor typos in search queries.
+- Tested frontend filtering before moving to backend optimization.
 
-## Deploy on Vercel
+### 3️⃣ `feat(search): implement fuzzy search with pg_trgm, pagination, and type-safe API response`
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+- Optimized fuzzy search using **PostgreSQL `pg_trgm` extension**.
+- Created **GIN indexes** for efficient search.
+- Implemented **pagination** and **type-safe API responses**.
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+### 4️⃣ `feat(search): add keyword highlighting in search results`
+
+- Highlighted matched keywords dynamically in frontend results for better UX.
+- Combined with **debounce** to reduce API calls while typing.
+
+---
+
+## 💡 Purpose
+
+- Experiment with **fuzzy search techniques** step by step.
+- Learn frontend **performance optimizations** like debounce and keyword highlighting.
+- Build a **robust, reusable search system** for future projects.
+
+---
